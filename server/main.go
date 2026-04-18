@@ -1,40 +1,25 @@
 package main
 
 import (
-	"log/slog"
+	"embed"
+	"fmt"
 	"net/http"
 	"os"
-	"server/internal/health"
-	"server/internal/logger"
-	"server/internal/middleware"
-	"time"
-
-	"github.com/joho/godotenv"
+	"server/internal/core/app"
 )
 
+//go:embed all:dist
+var staticFiles embed.FS
+
 func main() {
-	var startTime = time.Now()
-	_ = godotenv.Load()
-	logger.Init()
-	router := http.NewServeMux()
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-		slog.Info("PORT not set, defaulting to " + port)
-	}
-
-	router.HandleFunc("GET /health", health.Handler(startTime))
-	router.Handle("/", staticFileServer())
-
-	server := http.Server{
-		Addr:    ":" + port,
-		Handler: middleware.RequestLogger(router),
-	}
-
-	slog.Info("Server running", "Port", port)
-	err := server.ListenAndServe()
+	application, err := app.New(staticFiles)
 	if err != nil {
-		slog.Error("Server failed to run", "Port", port, "error", err)
+		fmt.Fprintf(os.Stderr, "failed to initialize app: %v\n", err)
+		os.Exit(1)
+	}
+
+	if err := application.Run(); err != nil && err != http.ErrServerClosed {
+		fmt.Fprintf(os.Stderr, "server failed to run: %v\n", err)
+		os.Exit(1)
 	}
 }
