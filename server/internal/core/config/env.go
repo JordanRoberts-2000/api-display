@@ -21,7 +21,7 @@ type env struct {
 func loadEnv() (env, error) {
 	_ = godotenv.Load()
 
-	appEnv := AppEnv(optionalEnv("APP_ENV", string(EnvDevelopment)))
+	appEnv := AppEnv(optionalEnv("APP_ENV", string(EnvProduction)))
 
 	logLevel, err := parseLogLevel(optionalEnv("LOG_LEVEL", "info"))
 	if err != nil {
