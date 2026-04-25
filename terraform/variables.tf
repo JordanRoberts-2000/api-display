@@ -22,34 +22,9 @@ variable "key_pair_name" {
 variable "ssh_security_group_name" {
   type        = string
   description = "Existing SSH security group name"
-  default     = "ssh-access"
 }
 
 variable "web_security_group_name" {
   type        = string
   description = "Existing web security group name"
-  default     = "web-access"
-}
-
-variable "image_name" {
-  type        = string
-  description = "Docker image to pull on boot"
-}
-
-variable "host_port" {
-  type        = number
-  description = "Port exposed on the EC2 instance"
-  default     = 80
-}
-
-variable "container_port" {
-  type        = number
-  description = "Port the app listens on inside the container"
-  default     = 8080
-}
-
-variable "database_url" {
-  type        = string
-  description = "Database URL for the container"
-  sensitive   = true
 }

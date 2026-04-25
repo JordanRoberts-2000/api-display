@@ -2,6 +2,7 @@ services:
   api-display:
     image: ${IMAGE_NAME:?IMAGE_NAME is required}
     container_name: api-display
+    restart: on-failure:5
     ports:
       - "${HOST_PORT:?HOST_PORT is required}:${CONTAINER_PORT:?CONTAINER_PORT is required}"
     environment:
