@@ -1,0 +1,18 @@
+services:
+  api-display:
+    image: ${IMAGE_NAME:?IMAGE_NAME is required}
+    container_name: api-display
+    ports:
+      - "${HOST_PORT:?HOST_PORT is required}:${CONTAINER_PORT:?CONTAINER_PORT is required}"
+    environment:
+      APP_ENV: ${APP_ENV:?APP_ENV is required}
+      PORT: ${CONTAINER_PORT:?CONTAINER_PORT is required}
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-create-group: "false"
+        awslogs-region: ${AWS_REGION:?AWS_REGION is required}
+        awslogs-group: /api-display
+        awslogs-stream: app
