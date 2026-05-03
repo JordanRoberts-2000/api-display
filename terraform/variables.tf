@@ -24,7 +24,17 @@ variable "ssh_security_group_name" {
   description = "Existing SSH security group name"
 }
 
-variable "web_security_group_name" {
+variable "cdn_security_group_name" {
   type        = string
-  description = "Existing web security group name"
+  description = "Existing cdn security group name"
+}
+
+variable "certificate_domain" {
+  description = "Domain name of the ACM certificate to attach to CloudFront"
+  type        = string
+}
+
+variable "origin_secret" {
+  description = "Header set by cloudfront to confirm origin"
+  type        = string
 }
