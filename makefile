@@ -41,7 +41,7 @@ dev-server:
 	cd $(SERVER_DIR) && air
 
 dev-client:
-	cd $(CLIENT_DIR) && npm run dev
+	cd $(CLIENT_DIR) && npm run dev -- --host
 
 build: build-client build-server
 

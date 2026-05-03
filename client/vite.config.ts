@@ -1,18 +1,27 @@
 import { defineConfig } from "vite";
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import babel from "@rolldown/plugin-babel";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
+    tailwindcss(),
     VitePWA({
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         name: "API Display",
-        theme_color: "#fef9c2",
-        background_color: "#fef9c2",
+        theme_color: "#fefce8",
+        background_color: "#fefce8",
         start_url: "/",
         scope: "/",
         icons: [
@@ -37,5 +46,6 @@ export default defineConfig({
   },
   build: {
     outDir: "../server/dist",
+    emptyOutDir: true,
   },
 });
