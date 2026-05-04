@@ -15,9 +15,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      devOptions: {
-        enabled: true,
-      },
       manifest: {
         name: "API Display",
         theme_color: "#fefce8",

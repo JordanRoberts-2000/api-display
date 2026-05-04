@@ -1,4 +1,3 @@
-// src/hooks/usePwaUpdateChecker.ts
 import { time } from "@/lib/time";
 import { useEffect } from "react";
 import { toast } from "sonner";
