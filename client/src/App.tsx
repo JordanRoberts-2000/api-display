@@ -1,3 +1,5 @@
+import AppError from "./components/feedback/AppError";
+import AppLoading from "./components/feedback/AppLoading";
 import { useSession } from "./features/auth";
 import LoginPage from "./pages/LoginPage";
 import UrlsPage from "./pages/UrlsPage";
@@ -5,12 +7,10 @@ import UrlsPage from "./pages/UrlsPage";
 function App() {
   const sessionQuery = useSession();
 
-  if (sessionQuery.isPending) return <div>loading</div>;
-  if (sessionQuery.isError) return <div>error</div>;
+  if (sessionQuery.isPending) return <AppLoading />;
+  if (sessionQuery.isError) return <AppError />;
 
-  if (!sessionQuery.data.isAuth) return <LoginPage />;
-
-  return <UrlsPage />;
+  return sessionQuery.data.isAuth ? <UrlsPage /> : <LoginPage />;
 }
 
 export default App;
