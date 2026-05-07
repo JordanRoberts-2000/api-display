@@ -7,6 +7,7 @@ export function useSession() {
     queryKey: queryKeys.session,
     queryFn: AuthApi.session,
     refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
     staleTime: 60_000,
   });
 }

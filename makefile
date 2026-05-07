@@ -6,7 +6,7 @@ COMPOSE    := docker compose -f /opt/api-display/docker-compose.prod.yml
 .PHONY: push ssh restart deploy bootstrap infra provision \
         dev dev-server dev-client \
         build build-client build-server \
-        run-server clean
+        run-server clean api-lint api-docs
 
 push:
 	docker build -t $(IMAGE):latest .
@@ -56,3 +56,9 @@ run: build
 
 clean:
 	rm -rf $(SERVER_DIR)/bin $(SERVER_DIR)/dist
+
+api-lint:
+	npx @redocly/cli lint openapi/openapi.yaml --config openapi/redocly.yaml
+
+api-docs:
+	npx @redocly/cli preview --port 5005 -d openapi/

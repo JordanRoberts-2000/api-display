@@ -1,0 +1,15 @@
+health:
+  get:
+    summary: Check server health
+    tags:
+      - health
+    responses:
+      "200":
+        description: The server is healthy.
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/health.yaml#/HealthResponse"
+
+      "500":
+        description: Unexpected server error.

@@ -1,0 +1,18 @@
+session:
+  get:
+    summary: Session validity
+    tags:
+      - auth
+    responses:
+      "200":
+        description: A valid session exists.
+
+      "401":
+        description: No valid session exists.
+        content:
+          application/json:
+            schema:
+              $ref: "../../components/schemas/auth.yaml#/AuthSessionErrorResponse"
+
+      "500":
+        description: Unexpected server error.

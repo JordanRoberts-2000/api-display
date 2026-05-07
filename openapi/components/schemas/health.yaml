@@ -1,0 +1,16 @@
+HealthResponse:
+  type: object
+  required:
+    - status
+    - timestamp
+    - uptime
+  properties:
+    status:
+      type: string
+      enum:
+        - ok
+    timestamp:
+      type: string
+      format: date-time
+    uptime:
+      type: string

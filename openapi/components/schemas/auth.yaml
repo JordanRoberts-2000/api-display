@@ -1,0 +1,13 @@
+AuthSessionErrorResponse:
+  type: object
+  required:
+    - error
+  properties:
+    error:
+      $ref: "#/AuthSessionErrorCode"
+
+AuthSessionErrorCode:
+  type: string
+  enum:
+    - no_session
+    - session_expired
